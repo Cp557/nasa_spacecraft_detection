@@ -8,16 +8,16 @@ import io
 
 st.write('# 🚀 Spacecraft Detector 🛰️')
 
-@st.cache_resource
-def load_model():
-    # Path to the model in the same repository
-    model_path = 'yolo_model/weights/best.pt'
+# @st.cache_resource
+# def load_model():
+#     # Path to the model in the same repository
+#     model_path = 'yolo_model/weights/best.pt'
 
-    # Load the model
-    model = YOLO(model_path)
-    return model
+#     # Load the model
+#     model = YOLO(model_path)
+#     return model
 
-model = load_model()
+model = load_model('yolo_model/weights/best.pt')
 
 uploaded_files = st.file_uploader("Choose up to 10 spacecraft images", type=["jpg", "jpeg", "png"], accept_multiple_files=True)
 
