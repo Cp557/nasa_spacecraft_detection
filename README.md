@@ -44,12 +44,4 @@ The project includes data preprocessing, model training using YOLOv8, model eval
 
 ## Results
 
-[Summary of the project's results, including model performance and any interesting findings]
 
-## Contributing
-
-[Guidelines for contributing to the project]
-
-## License
-
-[License information for the project]
