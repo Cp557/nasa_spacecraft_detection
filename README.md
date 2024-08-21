@@ -29,20 +29,22 @@ YOLOv8 model
 The model's performance is evaluated using the Jaccard Index, also known as the Intersection over Union (IoU). This metric is particularly well-suited for object detection tasks, as it measures the overlap between the predicted bounding box and the ground truth bounding box.
 Jaccard Index (IoU) Explanation
 The Jaccard Index is defined as the size of the intersection divided by the size of the union of two pixel sets:
+
 J(A,B) = |A ∩ B| / |A ∪ B| = |A ∩ B| / (|A| + |B| - |A ∩ B|)
+
 Where:
 
 A is the set of pixels in the ground truth bounding box
 B is the set of pixels in the predicted bounding box
 
-# The Jaccard Index ranges from 0 to 1, where:
+### The Jaccard Index ranges from 0 to 1, where:
 
 0 indicates no overlap between the predicted and ground truth bounding boxes
 1 indicates perfect overlap (prediction exactly matches the ground truth)
 
 A higher Jaccard Index indicates better performance, as it means the model's predictions more closely align with the true spacecraft locations in the images.
 
-# Model Performance
+### Model Performance
 Our trained model achieved an average Jaccard Index of 0.8703 across the test set.
 This score indicates excellent performance:
 
