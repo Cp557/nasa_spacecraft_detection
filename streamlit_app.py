@@ -11,10 +11,7 @@ st.write('# 🚀 Spacecraft Detector 🛰️')
 
 @st.cache_resource
 def load_model():
-    model_path = 'yolo_model/weights/best.pt'
-    st.write(f"Current working directory: {os.getcwd()}")
-    st.write(f"Model path: {os.path.abspath(model_path)}")
-    st.write(f"File exists: {os.path.exists(model_path)}")    
+    model_path = 'yolo_model/weights/best.pt'  
     try:
         model = YOLO(model_path)
         return model
