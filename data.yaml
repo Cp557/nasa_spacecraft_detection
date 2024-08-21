@@ -1,0 +1,10 @@
+
+path: /content/drive/MyDrive/Coding/detection/data/ 
+
+train: images/train/  
+val: images/val/      
+
+nc: 1       
+names: ['spacecraft']   
+
+labels: labels
