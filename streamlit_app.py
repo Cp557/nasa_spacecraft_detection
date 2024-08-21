@@ -7,7 +7,7 @@ from ultralytics import YOLO
 import requests
 import io
 
-st.write('# Spacecraft Detector')
+st.write('# 🚀 Spacecraft Detector 🛰️')
 
 @st.cache_resource
 def load_model():
