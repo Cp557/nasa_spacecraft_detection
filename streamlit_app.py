@@ -1,22 +1,4 @@
 import streamlit as st
-import subprocess
-import sys
-import importlib
-
-def install_and_import(package):
-    try:
-        importlib.import_module(package)
-    except ImportError:
-        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-    finally:
-        globals()[package] = importlib.import_module(package)
-
-# Install and import required packages
-required_packages = ['pandas', 'matplotlib', 'opencv-python-headless', 'numpy', 'ultralytics', 'requests']
-for package in required_packages:
-    install_and_import(package)
-
-# Now you can use the imported modules
 import pandas as pd
 import matplotlib.pyplot as plt
 import cv2
