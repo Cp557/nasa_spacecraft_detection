@@ -14,8 +14,18 @@ def load_model():
     # GitHub raw content URL for the model weights
     url = "https://github.com/Cp557/nasa_spacecraft_detection/raw/main/yolo_model/weights/best.pt"
     response = requests.get(url)
-    model_bytes = io.BytesIO(response.content)
-    model = YOLO(model_bytes)
+    
+    # Save the model to a temporary file
+    with tempfile.NamedTemporaryFile(delete=False, suffix='.pt') as tmp_file:
+        tmp_file.write(response.content)
+        tmp_file_path = tmp_file.name
+    
+    # Load the model from the temporary file
+    model = YOLO(tmp_file_path)
+    
+    # Remove the temporary file
+    os.unlink(tmp_file_path)
+    
     return model
 
 model = load_model()
