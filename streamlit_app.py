@@ -1,13 +1,22 @@
 import streamlit as st
-import pandas as pd
-#import matplotlib.pyplot as plt
 import cv2
 import numpy as np
 from ultralytics import YOLO
 import os
-import io
 
 st.write('# 🚀 Spacecraft Detector 🛰️')
+
+st.write("""
+This app uses a YOLO (You Only Look Once) model to detect spacecraft in images. 
+You can upload your own images of spacecraft, and the model will attempt to identify and highlight them.
+
+Here are some tips for getting the best results:
+1. Use clear, well-lit images
+2. Ensure the spacecraft is the main focus of the image
+3. The model works best with real photographs, not artistic renderings
+
+Below is an example of how the detector works:
+""")
 
 @st.cache_resource
 def load_model():
@@ -23,6 +32,36 @@ model = load_model()
 
 if model is None:
     st.stop()
+
+# Display example image with side-by-side comparison
+example_image_path = 'assets/artemis2.jpg'
+if os.path.exists(example_image_path):
+    original_image = cv2.imread(example_image_path)
+    original_image_rgb = cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB)
+    
+    # Create a copy of the original image for drawing bounding boxes
+    processed_image = original_image.copy()
+    
+    # Run model on the example image
+    results = model(processed_image)
+    
+    for r in results:
+        for box in r.boxes:
+            x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
+            cv2.rectangle(processed_image, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
+    
+    processed_image_rgb = cv2.cvtColor(processed_image, cv2.COLOR_BGR2RGB)
+    
+    # Display the original and processed images side by side
+    col1, col2 = st.columns(2)
+    with col1:
+        st.image(original_image_rgb, caption="Original Image", use_column_width=True)
+    with col2:
+        st.image(processed_image_rgb, caption="Processed Image", use_column_width=True)
+else:
+    st.write("Example image not found. Please ensure 'artemis2.jpg' is in the 'assets' folder.")
+
+st.write("Now, try uploading your own images!")
 
 uploaded_files = st.file_uploader("Choose up to 10 spacecraft images", type=["jpg", "jpeg", "png"], accept_multiple_files=True)
 
@@ -55,3 +94,5 @@ if uploaded_files:
             st.write(f"Couldn't detect spacecraft in {uploaded_file.name}")
         else:
             st.write(f"Spacecraft detected in {uploaded_file.name}")
+else:
+    st.write("Upload an image to get started!")
