@@ -4,28 +4,22 @@ import matplotlib.pyplot as plt
 import cv2
 import numpy as np
 from ultralytics import YOLO
-import requests
 import io
 
 st.write('# 🚀 Spacecraft Detector 🛰️')
 
 @st.cache_resource
 def load_model():
-    # GitHub raw content URL for the model weights
-    url = "https://github.com/Cp557/nasa_spacecraft_detection/raw/main/yolo_model/weights/best.pt"
-    response = requests.get(url)
+    # Path to the model in the same repository
+    model_path = 'yolo_model/weights/best.pt'
     
-    # Save the model to a temporary file
-    with tempfile.NamedTemporaryFile(delete=False, suffix='.pt') as tmp_file:
-        tmp_file.write(response.content)
-        tmp_file_path = tmp_file.name
-    
-    # Load the model from the temporary file
-    model = YOLO(tmp_file_path)
-    
-    # Remove the temporary file
-    os.unlink(tmp_file_path)
-    
+    # Check if the file exists
+    if not os.path.exists(model_path):
+        st.error(f"Model file not found at {model_path}. Please check the file path.")
+        return None
+
+    # Load the model
+    model = YOLO(model_path)
     return model
 
 model = load_model()
