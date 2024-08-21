@@ -13,7 +13,7 @@ You can upload your own images of spacecraft, and the model will attempt to iden
 Here are some tips for getting the best results:
 1. Use clear, well-lit images
 2. Ensure the spacecraft is the main focus of the image
-3. The model works best with real photographs, not artistic renderings
+3. The model works best with real photographs
 
 Below is an example of how the detector works:
 """)
