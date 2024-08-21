@@ -11,10 +11,22 @@ st.write('# 🚀 Spacecraft Detector 🛰️')
 @st.cache_resource
 def load_model():
     model_path = 'yolo_model/weights/best.pt'
-    model = YOLO(model_path)
-    return model
+    st.write(f"Current working directory: {os.getcwd()}")
+    st.write(f"Model path: {os.path.abspath(model_path)}")
+    st.write(f"File exists: {os.path.exists(model_path)}")
+    st.write(f"Ultralytics version: {YOLO.__version__}")
+    
+    try:
+        model = YOLO(model_path)
+        return model
+    except Exception as e:
+        st.error(f"Failed to load the model: {str(e)}")
+        return None
 
 model = load_model()
+
+if model is None:
+    st.stop()
 
 uploaded_files = st.file_uploader("Choose up to 10 spacecraft images", type=["jpg", "jpeg", "png"], accept_multiple_files=True)
 
