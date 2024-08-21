@@ -12,11 +12,6 @@ st.write('# 🚀 Spacecraft Detector 🛰️')
 def load_model():
     # Path to the model in the same repository
     model_path = 'yolo_model/weights/best.pt'
-    
-    # Check if the file exists
-    if not os.path.exists(model_path):
-        st.error(f"Model file not found at {model_path}. Please check the file path.")
-        return None
 
     # Load the model
     model = YOLO(model_path)
