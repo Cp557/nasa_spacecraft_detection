@@ -14,7 +14,7 @@ def load_model():
     model = YOLO(model_path)
     return model
 
-model = load_model('yolo_model/weights/best.pt')
+model = load_model()
 
 uploaded_files = st.file_uploader("Choose up to 10 spacecraft images", type=["jpg", "jpeg", "png"], accept_multiple_files=True)
 
