@@ -1,0 +1,9 @@
+# requirements.txt
+
+streamlit
+pandas
+matplotlib
+opencv-python-headless
+numpy
+ultralytics
+requests
