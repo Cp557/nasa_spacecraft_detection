@@ -34,7 +34,7 @@ if model is None:
     st.stop()
 
 # Display example image with side-by-side comparison
-example_image_path = 'assets/artemis2.jpg'
+example_image_path = '/artemis2.jpg'
 if os.path.exists(example_image_path):
     original_image = cv2.imread(example_image_path)
     original_image_rgb = cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB)
