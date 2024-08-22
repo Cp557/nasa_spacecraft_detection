@@ -5,8 +5,6 @@ This project is part of the [NASA Spacecraft Detection Challenge](https://www.dr
 
 The project includes data preprocessing, model training using YOLOv8, model evaluation, and a Streamlit web application for interactive spacecraft detection. The trained model can identify spacecraft with high accuracy.
 
-Here's an example of a spacecraft image with a bounding box, demonstrating the output of our detection model:
-
 ![Spacecraft with Bounding Box](spacecraft.png)
 *Example of a spacecraft detected by our model, with the bounding box indicating the spacecraft's location.*
 
