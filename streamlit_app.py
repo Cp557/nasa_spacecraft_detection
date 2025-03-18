@@ -55,9 +55,9 @@ if os.path.exists(example_image_path):
     # Display the original and processed images side by side
     col1, col2 = st.columns(2)
     with col1:
-        st.image(original_image_rgb, caption="Original Image", use_column_width=True)
+        st.image(original_image_rgb, caption="Original Image", use_container_width=True)
     with col2:
-        st.image(processed_image_rgb, caption="Processed Image", use_column_width=True)
+        st.image(processed_image_rgb, caption="Processed Image", use_container_width=True)
 else:
     st.write("Example image not found. Please ensure 'artemis2.jpg' is in the 'assets' folder.")
 
@@ -87,7 +87,7 @@ if uploaded_files:
         im = cv2.cvtColor(im_array, cv2.COLOR_BGR2RGB)
         
         # Display the image using Streamlit
-        st.image(im, caption=f"Processed: {uploaded_file.name}", use_column_width=True)
+        st.image(im, caption=f"Processed: {uploaded_file.name}", use_container_width=True)
         
         # Display message if no spacecraft detected
         if not spacecraft_detected:
