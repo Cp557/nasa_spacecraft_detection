@@ -4,7 +4,7 @@ import numpy as np
 from ultralytics import YOLO
 import os
 
-st.write('# 🚀 Spacecraft Detector 🛰️')
+st.write('# Spacecraft Detector 🛰️🚀')
 
 st.write("""
 This app uses a YOLO (You Only Look Once) model to detect spacecraft in images. 
