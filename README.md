@@ -11,14 +11,14 @@ The project includes data preprocessing, model training using YOLOv8, model eval
 ## Project Structure
 ```
 .
-├── yolo_model/            # Directory containing model weights
+├── yolo_model/            # Directory containing model weights and training artifacts
 ├── README.md              # This file
+├── LICENSE                # MIT license
 ├── artemis2.jpg           # Example image for the Streamlit app
 ├── spacecraft.png         # Example image of spacecraft with bounding box
 ├── data.yaml              # YAML file for data configuration
 ├── data_preprocessing.ipynb  # Jupyter notebook for data preprocessing
 ├── evaluation.ipynb       # Jupyter notebook for model evaluation
-├── packages.txt           # List of system packages required
 ├── requirements.txt       # List of Python packages required
 ├── streamlit_app.py       # Streamlit application for interactive detection
 └── yolo_training.ipynb    # Jupyter notebook for model training
@@ -27,6 +27,17 @@ The project includes data preprocessing, model training using YOLOv8, model eval
 ## Usage
 You can access the interactive spacecraft detection application at:
 [https://nasaspacecraftdetection-mvfmxebuyxmcpcyph4i9bg.streamlit.app/](https://nasaspacecraftdetection-mvfmxebuyxmcpcyph4i9bg.streamlit.app/)
+
+### Run Locally
+```bash
+git clone https://github.com/Cp557/nasa_spacecraft_detection.git
+cd nasa_spacecraft_detection
+pip install -r requirements.txt
+streamlit run streamlit_app.py
+```
+The app will be available at `http://localhost:8501`.
+
+The notebooks (`data_preprocessing.ipynb`, `yolo_training.ipynb`, `evaluation.ipynb`) were developed in Google Colab and mount Google Drive for data access — the hardcoded `/content/drive/...` paths will need to be updated to your own data location to run them elsewhere.
 
 ## Data and Preprocessing
 
@@ -86,3 +97,6 @@ This score indicates excellent performance:
 - The score is particularly impressive given the challenges of the task, including varying spacecraft types, different backgrounds, and potential image distortions.
 
 For more details on the evaluation process, refer to the `evaluation.ipynb` notebook.
+
+## License
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
