@@ -14,8 +14,6 @@ Here are some tips for getting the best results:
 1. Use clear, well-lit images
 2. Ensure the spacecraft is the main focus of the image
 3. The model works best with real photographs
-
-Below is an example of how the detector works:
 """)
 
 @st.cache_resource
@@ -33,31 +31,35 @@ model = load_model()
 if model is None:
     st.stop()
 
-# Display example image with side-by-side comparison
+# Let visitors try the model on a ready-made example with one click,
+# no upload required.
 example_image_path = 'artemis2.jpg'
 if os.path.exists(example_image_path):
+    st.write("No image handy? Try the example below:")
+
     original_image = cv2.imread(example_image_path)
     original_image_rgb = cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB)
-    
-    # Create a copy of the original image for drawing bounding boxes
-    processed_image = original_image.copy()
-    
-    # Run model on the example image
-    results = model(processed_image)
-    
-    for r in results:
-        for box in r.boxes:
-            x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
-            cv2.rectangle(processed_image, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
-    
-    processed_image_rgb = cv2.cvtColor(processed_image, cv2.COLOR_BGR2RGB)
-    
-    # Display the original and processed images side by side
-    col1, col2 = st.columns(2)
-    with col1:
-        st.image(original_image_rgb, caption="Original Image", use_container_width=True)
-    with col2:
-        st.image(processed_image_rgb, caption="Processed Image", use_container_width=True)
+
+    if "example_result" not in st.session_state:
+        st.session_state.example_result = None
+
+    image_slot = st.empty()
+    if st.session_state.example_result is None:
+        image_slot.image(original_image_rgb, caption="Example spacecraft image", use_container_width=True)
+    else:
+        image_slot.image(st.session_state.example_result, caption="Spacecraft detected!", use_container_width=True)
+
+    if st.button("🔍 Run Detection on Example Image"):
+        processed_image = original_image.copy()
+        results = model(processed_image)
+
+        for r in results:
+            for box in r.boxes:
+                x1, y1, x2, y2 = box.xyxy[0].cpu().numpy()
+                cv2.rectangle(processed_image, (int(x1), int(y1)), (int(x2), int(y2)), (0, 255, 0), 2)
+
+        st.session_state.example_result = cv2.cvtColor(processed_image, cv2.COLOR_BGR2RGB)
+        st.rerun()
 else:
     st.write("Example image not found. Please ensure 'artemis2.jpg' is in the 'assets' folder.")
 
